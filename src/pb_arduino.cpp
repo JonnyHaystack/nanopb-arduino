@@ -14,8 +14,11 @@ pb_ostream_s as_pb_ostream(Print& p) {
 
 static bool pb_stream_read(pb_istream_t *stream, pb_byte_t *buf, size_t count) {
     Stream* s = reinterpret_cast<Stream*>(stream->state);
-    size_t written = s->readBytes(buf, count);
-    return written == count;
+    size_t read = s->readBytes(buf, count);
+    if (read == 0) {
+        stream->bytes_left = 0;
+    }
+    return read == count;
 };
 
 pb_istream_s as_pb_istream(Stream& s) {
