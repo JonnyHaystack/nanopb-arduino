@@ -32,5 +32,5 @@ pb_istream_s as_pb_istream(Stream &s, size_t bytes_left) {
 }
 
 pb_istream_s as_pb_istream(Stream &s) {
-    as_pb_istream(s, SIZE_MAX);
+    return as_pb_istream(s, SIZE_MAX);
 };
